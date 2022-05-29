@@ -24,6 +24,9 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php \yii\bootstrap4\ActiveForm::begin([
             'options' => [
                 'enctype'=>'multipart/form-data',
+                'extensions' => 'mp4',
+                'skipOnEmpty' => true,
+                'maxFiles' => 1,
             ]
         ]); ?>
 

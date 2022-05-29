@@ -8,7 +8,7 @@ NavBar::begin([
     'brandUrl' => Yii::$app->homeUrl,
 ]);
 $menuItems = [
-    ['label' => 'Create', 'url' => ['/site/index']],
+    ['label' => 'Create', 'url' => ['/video/create']],
 ];
 if (Yii::$app->user->isGuest) {
     $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
