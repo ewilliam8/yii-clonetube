@@ -6,6 +6,8 @@ use yii\bootstrap4\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model common\models\Video */
 /* @var $form yii\bootstrap4\ActiveForm */
+
+\backend\assets\TagsInputAsset::register($this);
 ?>
 
 <div class="video-form">
@@ -18,6 +20,9 @@ use yii\bootstrap4\ActiveForm;
 
     <div class="row">
         <div class="col-sm-8">
+
+            <?php echo $form->errorSummary($model) ?>
+
             <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
             <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
@@ -30,7 +35,9 @@ use yii\bootstrap4\ActiveForm;
                 </div>
             </div>
 
-            <?= $form->field($model, 'tags')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'tags', [
+                'inputOptions' => ['data-role' => 'tagsinput'],
+            ])->textInput(['maxlength' => true]) ?>
 
             <div class="form-group">
                 <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

@@ -13,7 +13,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+    <?php $form = \yii\bootstrap4\ActiveForm::begin([
+        'options' => ['enctype'=>'multipart/form-data']
+    ]); ?>
+
     <div class="d-flex flex-column justify-content-center align-items-center">
+
         <div class="upload-icon">
             <i class="fa-solid fa-upload"></i>
         </div>
@@ -21,14 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <p class="m-0">Drag and drop a file you want to upload</p>
         <p class="text-muted">Your video will be private until you publish it</p>
 
-        <?php \yii\bootstrap4\ActiveForm::begin([
-            'options' => [
-                'enctype'=>'multipart/form-data',
-                'extensions' => 'mp4',
-                'skipOnEmpty' => true,
-                'maxFiles' => 1,
-            ]
-        ]); ?>
+        <?php echo $form->errorSummary($model) ?>
 
         <button class="btn btn-primary btf-file">
             Select File

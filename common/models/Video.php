@@ -2,11 +2,14 @@
 
 namespace common\models;
 
+use Faker\Provider\Image;
 use Yii;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\helpers\FileHelper;
 use yii\web\UploadedFile;
+use Imagine\Image\Box;
+
 
 /**
  * This is the model class for table "{{%video}}".
@@ -71,7 +74,9 @@ class Video extends \yii\db\ActiveRecord
             [['video_id'], 'string', 'max' => 16],
             [['title', 'tags', 'video_name'], 'string', 'max' => 512],
             [['video_id'], 'unique'],
+            [['video'], 'file', 'extensions' => ['mp4']],
             ['has_thumbnail', 'default', 'value' => 0],
+            ['thumbnail', 'image', 'minWidth' => 1280, 'minHeight' => 720],
             ['status', 'default', 'value' => self::STATUS_UNLISTED],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['created_by' => 'id']],
         ];
@@ -144,6 +149,10 @@ class Video extends \yii\db\ActiveRecord
                 FileHelper::createDirectory(dirname($thumbnailPath));
             }
             $this->thumbnail->saveAs($thumbnailPath);
+            \yii\imagine\Image::getImagine()
+                ->open($thumbnailPath)
+                ->thumbnail(new Box(1280, 1280))
+                ->save($thumbnailPath, ['quality' => 40]);
         }
 
         return true;
@@ -156,7 +165,9 @@ class Video extends \yii\db\ActiveRecord
 
     public function getThumbnailLink()
     {
-        return Yii::$app->params['frontendUrl'].'frontend/web/storage/thumbs/' .$this->video_id .'.jpg';
+        return $this->has_thumbnail ?
+            Yii::$app->params['frontendUrl'].'frontend/web/storage/thumbs/' .$this->video_id .'.jpg'
+            : '';
     }
 
     public function getStatusLabels()
