@@ -35,5 +35,4 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?php \yii\bootstrap4\ActiveForm::end() ?>
     </div>
-
 </div>

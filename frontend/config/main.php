@@ -8,9 +8,9 @@ $params = array_merge(
 
 return [
     'id' => 'app-frontend',
-    'name' => 'CloneTube',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'defaultRoute' => '/video/index',
     'controllerNamespace' => 'frontend\controllers',
     'language' => 'ru-RU',
     'components' => [
@@ -47,6 +47,9 @@ return [
 //            'enableStrictParsing' => true,
             'rules' => [
             ],
+        ],
+        'assetManager' => [
+            'appendTimestamp' => true,
         ],
     ],
     'params' => $params,

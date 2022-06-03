@@ -10,7 +10,7 @@
         'items' => [
             [
                 'label' => 'Dashboard',
-                'url' => ['/site/index'],
+                'url' => ['/video/create'],
             ],
             [
                 'label' => 'Videos',
