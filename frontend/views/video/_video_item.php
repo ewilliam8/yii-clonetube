@@ -1,12 +1,17 @@
 <?php
 /** @var $model \common\models\Video */
+
+use yii\helpers\Url;
+
 ?>
 
 <div class="card m-3" style="width: 18rem;">
-    <div class="embed-responsive embed-responsive-16by9 mb-3">
-        <video src="<?php echo $model->getVideoLink() ?>"
-               poster="<?php echo $model->getThumbnailLink() ?>"></video>
-    </div>
+    <a href="<?php echo Url::to(['/video/view', 'id' => $model->video_id])  ?>">
+        <div class="embed-responsive embed-responsive-16by9 mb-3">
+            <video src="<?php echo $model->getVideoLink() ?>"
+                   poster="<?php echo $model->getThumbnailLink() ?>"></video>
+        </div>
+    </a>
 
     <div class="card-body p-2">
         <h5 class="card-title m-0"><?php echo  $model->title ?></h5>
